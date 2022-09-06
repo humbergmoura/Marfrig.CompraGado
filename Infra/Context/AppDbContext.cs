@@ -15,8 +15,6 @@ namespace Infra.Context
         {
         }
 
-        public DbSet<CompraGadoItem> CompraGadoItem { get;set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
