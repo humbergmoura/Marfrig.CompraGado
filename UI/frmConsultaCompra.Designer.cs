@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnAnterior = new System.Windows.Forms.Button();
@@ -37,13 +39,6 @@
             this.txtId = new System.Windows.Forms.TextBox();
             this.cmbPecuarista = new System.Windows.Forms.ComboBox();
             this.grvCompras = new System.Windows.Forms.DataGridView();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtpAte = new System.Windows.Forms.DateTimePicker();
-            this.lblAte = new System.Windows.Forms.Label();
-            this.lblDe = new System.Windows.Forms.Label();
-            this.dtpDe = new System.Windows.Forms.DateTimePicker();
-            this.btnLimpar = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,13 +49,19 @@
             this.Preco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Animal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpAte = new System.Windows.Forms.DateTimePicker();
+            this.lblAte = new System.Windows.Forms.Label();
+            this.lblDe = new System.Windows.Forms.Label();
+            this.dtpDe = new System.Windows.Forms.DateTimePicker();
+            this.btnLimpar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grvCompras)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Enabled = false;
             this.btnPesquisar.Location = new System.Drawing.Point(10, 49);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
@@ -146,11 +147,88 @@
             this.Animal,
             this.CompraGado});
             this.grvCompras.Location = new System.Drawing.Point(10, 197);
+            this.grvCompras.MultiSelect = false;
             this.grvCompras.Name = "grvCompras";
             this.grvCompras.RowTemplate.Height = 25;
+            this.grvCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grvCompras.Size = new System.Drawing.Size(670, 204);
             this.grvCompras.TabIndex = 15;
             this.grvCompras.SelectionChanged += new System.EventHandler(this.grvCompras_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Width = 30;
+            // 
+            // Pecuarista
+            // 
+            this.Pecuarista.DataPropertyName = "Pecuarista";
+            this.Pecuarista.HeaderText = "Pecuarista";
+            this.Pecuarista.Name = "Pecuarista";
+            this.Pecuarista.Width = 300;
+            // 
+            // DataEntrega
+            // 
+            this.DataEntrega.DataPropertyName = "DataEntrega";
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataEntrega.HeaderText = "DataEntrega";
+            this.DataEntrega.Name = "DataEntrega";
+            this.DataEntrega.Width = 150;
+            // 
+            // IdCompraGado
+            // 
+            this.IdCompraGado.DataPropertyName = "IdCompraGado";
+            this.IdCompraGado.HeaderText = "IdCopraGado";
+            this.IdCompraGado.Name = "IdCompraGado";
+            this.IdCompraGado.Visible = false;
+            // 
+            // IdAnimal
+            // 
+            this.IdAnimal.DataPropertyName = "IdAnimal";
+            this.IdAnimal.HeaderText = "IdAnimal";
+            this.IdAnimal.Name = "IdAnimal";
+            this.IdAnimal.Visible = false;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.DataPropertyName = "Quantidade";
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.Visible = false;
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Total.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Total.HeaderText = "Valor Total";
+            this.Total.Name = "Total";
+            // 
+            // Preco
+            // 
+            this.Preco.DataPropertyName = "Preco";
+            this.Preco.HeaderText = "Preco";
+            this.Preco.Name = "Preco";
+            this.Preco.Visible = false;
+            // 
+            // Animal
+            // 
+            this.Animal.DataPropertyName = "Animal";
+            this.Animal.HeaderText = "Animal";
+            this.Animal.Name = "Animal";
+            this.Animal.Visible = false;
+            // 
+            // CompraGado
+            // 
+            this.CompraGado.DataPropertyName = "CompraGado";
+            this.CompraGado.HeaderText = "CompraGado";
+            this.CompraGado.Name = "CompraGado";
+            this.CompraGado.Visible = false;
             // 
             // lblTitulo
             // 
@@ -184,6 +262,7 @@
             this.dtpAte.Name = "dtpAte";
             this.dtpAte.Size = new System.Drawing.Size(238, 23);
             this.dtpAte.TabIndex = 26;
+            this.dtpAte.ValueChanged += new System.EventHandler(this.dtpAte_ValueChanged);
             // 
             // lblAte
             // 
@@ -209,6 +288,7 @@
             this.dtpDe.Name = "dtpDe";
             this.dtpDe.Size = new System.Drawing.Size(249, 23);
             this.dtpDe.TabIndex = 25;
+            this.dtpDe.ValueChanged += new System.EventHandler(this.dtpDe_ValueChanged);
             // 
             // btnLimpar
             // 
@@ -219,75 +299,6 @@
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
             this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 30;
-            // 
-            // Pecuarista
-            // 
-            this.Pecuarista.DataPropertyName = "Pecuarista";
-            this.Pecuarista.HeaderText = "Pecuarista";
-            this.Pecuarista.Name = "Pecuarista";
-            this.Pecuarista.Width = 300;
-            // 
-            // DataEntrega
-            // 
-            this.DataEntrega.DataPropertyName = "DataEntrega";
-            this.DataEntrega.HeaderText = "DataEntrega";
-            this.DataEntrega.Name = "DataEntrega";
-            this.DataEntrega.Width = 150;
-            // 
-            // IdCompraGado
-            // 
-            this.IdCompraGado.DataPropertyName = "IdCompraGado";
-            this.IdCompraGado.HeaderText = "IdCopraGado";
-            this.IdCompraGado.Name = "IdCompraGado";
-            this.IdCompraGado.Visible = false;
-            // 
-            // IdAnimal
-            // 
-            this.IdAnimal.DataPropertyName = "IdAnimal";
-            this.IdAnimal.HeaderText = "IdAnimal";
-            this.IdAnimal.Name = "IdAnimal";
-            this.IdAnimal.Visible = false;
-            // 
-            // Quantidade
-            // 
-            this.Quantidade.DataPropertyName = "Quantidade";
-            this.Quantidade.HeaderText = "Quantidade";
-            this.Quantidade.Name = "Quantidade";
-            this.Quantidade.Visible = false;
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Valor Total";
-            this.Total.Name = "Total";
-            // 
-            // Preco
-            // 
-            this.Preco.DataPropertyName = "Preco";
-            this.Preco.HeaderText = "Preco";
-            this.Preco.Name = "Preco";
-            this.Preco.Visible = false;
-            // 
-            // Animal
-            // 
-            this.Animal.DataPropertyName = "Animal";
-            this.Animal.HeaderText = "Animal";
-            this.Animal.Name = "Animal";
-            this.Animal.Visible = false;
-            // 
-            // CompraGado
-            // 
-            this.CompraGado.DataPropertyName = "CompraGado";
-            this.CompraGado.HeaderText = "CompraGado";
-            this.CompraGado.Name = "CompraGado";
-            this.CompraGado.Visible = false;
             // 
             // frmConsultaCompra
             // 

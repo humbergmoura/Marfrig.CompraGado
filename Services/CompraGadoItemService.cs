@@ -9,16 +9,23 @@ namespace Services;
 public class CompraGadoItemService : ServiceBase
 {
     readonly CompraGadoItemRepository compraGadoItemRepository;
+    readonly CompraGadoRepository compraGadoRepository;
+    readonly PecuaristaRepository pecuaristaRepository;
 
-    public CompraGadoItemService(CompraGadoItemRepository _compraGadoItemRepository)
+    public CompraGadoItemService(CompraGadoItemRepository _compraGadoItemRepository, CompraGadoRepository compraGadoRepository, PecuaristaRepository pecuaristaRepository)
     {
         this.compraGadoItemRepository = _compraGadoItemRepository;
+        this.compraGadoRepository = compraGadoRepository;
+        this.pecuaristaRepository = pecuaristaRepository;
     }
 
     public async Task<CompraGadoItem> GetByIdAsync(int id)
     {
         try
         {
+            var compraGadoItem = await compraGadoItemRepository.GetByIdAsync(id);
+            if (compraGadoItemRepository.GetAll().Where(x => x.IdCompraGado == compraGadoItem.IdCompraGado).Count() == 1)
+                compraGadoItem.CompraGado = await compraGadoRepository.GetByIdAsync(compraGadoItem.IdCompraGado);
             return await this.compraGadoItemRepository.GetByIdAsync(id);
         }
         catch (Exception ex)
@@ -27,13 +34,41 @@ public class CompraGadoItemService : ServiceBase
         }
     }
 
-    public ListResponseResult<CompraGadoItem> GetAll(int pageSize = 10, int pageIndex = 0, string query = "")
+    public ListResponseResult<CompraGadoItem> GetAll(int pageSize = 10, int pageIndex = 0, ConsultaCompraDTO? query = null)
     {
         try
         {
             IList<CompraGadoItem> result;
 
             result = this.compraGadoItemRepository.GetAll();
+
+            if (query.Id != null || query.Nome != null || query.DataDe != null || query.DataAte != null)
+            {
+                foreach (var item in result)
+                {
+                    item.CompraGado = compraGadoRepository.GetByIdAsync(item.IdCompraGado).Result;
+                }
+                if (query.Id != null)
+                {
+                    result = result.Where(x => x.Id == query.Id).ToList();
+                }
+                if (query.Nome != null)
+                {
+                    var pe = pecuaristaRepository.GetAll().Where(x => x.Nome.Contains(query.Nome));
+                    foreach (var item in pe)
+                    {
+                        result = result.Where(x => x.CompraGado.IdPecuarista == item.Id).ToList();
+                    }
+                }
+                if (query.DataDe != null)
+                {
+                    result = result.Where(x => x.CompraGado.DataEntrega >= query.DataDe).ToList();
+                }
+                if (query.DataAte != null)
+                {
+                    result = result.Where(x => x.CompraGado.DataEntrega <= query.DataAte).ToList();
+                }
+            }
 
             var totalCount = result.Count();
             if (result != null && totalCount > 0)
@@ -91,6 +126,10 @@ public class CompraGadoItemService : ServiceBase
         if (result != null)
         {
             compraGadoItemRepository.Delete(result);
+            if (result.CompraGado != null)
+            {
+                compraGadoRepository.Delete(result.CompraGado);
+            }
         }
         return;
     }

@@ -23,10 +23,10 @@ public partial class frmCadastroCompra : Form
     private async Task ListarCompraGadoAsync()
     {
         listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex={pagina}", "Não foi possível obter o animais: ");
-        listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex={pagina}", "Não foi possível obter o animais: ");
+        listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=100&pageIndex=1", "Não foi possível obter o animais: ");
         listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
-        var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=10&pageIndex={pagina}", "Não foi possível obter o CompraGado: ");
-
+        var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=100&pageIndex=1", "Não foi possível obter o CompraGado: ");
+        decimal total = 0;
         foreach (var item in listCompraGadoItems.Data)
         {
             item.CompraGado = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado);
@@ -34,23 +34,20 @@ public partial class frmCadastroCompra : Form
             item.Preco = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Preco;
             item.Animal = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Descricao;
             item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).nome;
+            item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).id;
             item.Total = Math.Round(item.Preco * item.Quantidade, 2);
+            total += item.Total;
         }
+        lblTotal.Text = "Total: " + total.ToString("c");
 
         grvCompras.DataSource = listCompraGadoItems.Data;
         grvCompras.Refresh();
-        btnAnterior.Enabled = listCompraGado.Pagination.HasPrevious;
-        btnProximo.Enabled = listCompraGado.Pagination.HasNext;
+        ListarAnimalAsync();
+        ListarPecuaristasAsync();
+        btnAnterior.Enabled = listCompraGadoItems.Pagination.HasPrevious;
+        btnProximo.Enabled = listCompraGadoItems.Pagination.HasNext;
         LimparCampos();
         DesativarCampos();
-    }
-
-    private async Task ListarCompraGadoItemAsync()
-    {
-        cmbAnimal.ValueMember = "Id";
-        cmbAnimal.DisplayMember = "IdAnimal";
-        cmbAnimal.DataSource = listCompraGadoItems.Data;
-        cmbAnimal.Refresh();
     }
 
     private async Task ListarAnimalAsync()
@@ -75,21 +72,22 @@ public partial class frmCadastroCompra : Form
     {
         try
         {
-            if (txtQuantidade.Text.Length < 4)
+            if (txtQuantidade.Text.Length < 1)
             {
-                MessageBox.Show("Informe o Qunatidade do CompraGado!");
+                MessageBox.Show("Informe o Quantidade do CompraGado!");
                 return;
             }
 
             ListResponse<CompraGado> listResponse = new ListResponse<CompraGado>();
             listResponse.Data = new List<CompraGado>();
+            IList<CompraGadoItem> compraGadoItem = GetCompraGadoItem();
             if (_id != null)
             {
-                listResponse.Data.Add(new CompraGado { Id = (int)_id, Preco = Convert.ToDecimal(txtPreco.Text)/*, Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id, IdAnimal = listAnimais.Data.FirstOrDefault(e=>e.Descricao==cmbAnimal.Text).Id*/ });
+                listResponse.Data.Add(new CompraGado { Id = (int)_id, compraGadoItemDTO = compraGadoItem, DataEntrega = Convert.ToDateTime(dtpEntrega.Text), IdPecuarista = Convert.ToInt32(cmbPecuarista.SelectedValue) }); 
             }
             else
             {
-                listResponse.Data.Add(new CompraGado { Preco = Convert.ToDecimal(txtPreco.Text)/*, Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id, IdAnimal = listAnimais.Data.FirstOrDefault(e=>e.Descricao==cmbAnimal.Text).Id*/ });
+                listResponse.Data.Add(new CompraGado { compraGadoItemDTO = compraGadoItem, DataEntrega = Convert.ToDateTime(dtpEntrega.Text), IdPecuarista = Convert.ToInt32(cmbPecuarista.SelectedValue) });
             }
 
             await new CompraGadoServices().Save(listResponse, "CompraGado/SalvarCompraGado", "Não foi possível gravar o Compra Gado: ");
@@ -100,6 +98,20 @@ public partial class frmCadastroCompra : Form
         {
             MessageBox.Show("Erro ao Gravar!\n\n" + ex.Message, "Gravando", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    private IList<CompraGadoItem> GetCompraGadoItem()
+    {
+        IList<CompraGadoItem> compraGadoItems = new List<CompraGadoItem>();
+        CompraGadoItem compraGadoItem = new CompraGadoItem();
+        if (!string.IsNullOrEmpty(txtId.Text))
+            compraGadoItem.Id = Convert.ToInt32(txtId.Text);
+        if (_id != null)
+            compraGadoItem.IdCompraGado = (int)_id;
+        compraGadoItem.IdAnimal = Convert.ToInt32(cmbAnimal.SelectedValue);
+        compraGadoItem.Quantidade = Convert.ToInt32(txtQuantidade.Text);
+        compraGadoItems.Add(compraGadoItem);
+        return compraGadoItems;
     }
 
     private void LimparCampos()
@@ -150,7 +162,7 @@ public partial class frmCadastroCompra : Form
     {
         if (int.TryParse(txtId.Text, out int id))
         {
-            await new AnimalServices().Delete(id, "Animais/ExcluirAnimal?id=", "Não foi possível excluir o animal: ");
+            await new AnimalServices().Delete(id, "CompraGadoItem/ExcluirCompraGadoItem?id=", "Não foi possível excluir o animal: ");
             ListarCompraGadoAsync();
         }
         else
@@ -161,7 +173,7 @@ public partial class frmCadastroCompra : Form
 
     private void btnAlterar_Click(object sender, EventArgs e)
     {
-        if (int.TryParse(txtId.Text, out int id))
+        if (int.TryParse(txtIdCompraGado.Text, out int id))
         {
             _id = id;
             GravarCompraGadoAsync();
@@ -202,6 +214,7 @@ public partial class frmCadastroCompra : Form
             if (row != null)
             {
                 txtId.Text = row.Cells["Id"].Value.ToString();
+                txtIdCompraGado.Text = row.Cells["IdCompraGado"].Value.ToString();
                 txtPreco.Text = row.Cells["Preco"].Value.ToString();
                 txtQuantidade.Text = row.Cells["Quantidade"].Value.ToString();
                 dtpEntrega.Text = row.Cells["DataEntrega"].Value.ToString();

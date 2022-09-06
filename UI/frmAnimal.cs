@@ -14,7 +14,6 @@ public partial class frmAnimal : Form
     {
         InitializeComponent();
         ListarAnimalAsync();
-        ListarPecuaristasAsync();
     }
 
     #region [Metodos]
@@ -22,6 +21,7 @@ public partial class frmAnimal : Form
     private async Task ListarAnimalAsync()
     {
         var listAnimals = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex={pagina}", "Não foi possível obter o animais: ");
+        listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
         foreach (var item in listAnimals.Data)
         {
             item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.IdPecuarista).nome;
@@ -67,7 +67,6 @@ public partial class frmAnimal : Form
 
     private async Task ListarPecuaristasAsync()
     {
-        listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
         cmbPecuarista.ValueMember = "id";
         cmbPecuarista.DisplayMember = "nome";
 

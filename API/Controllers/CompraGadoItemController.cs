@@ -28,9 +28,9 @@ public class CompraGadoItemController : ControllerBase
 
     [HttpGet]
     [Route("BuscarCompraGadoItems")]
-    public ListResponseResult<CompraGadoItem> GetAll(int pageSize = 10, int pageIndex = 1)
+    public ListResponseResult<CompraGadoItem> GetAll(int pageSize = 10, int pageIndex = 1, [FromQuery] ConsultaCompraDTO? query = null)
     {
-        return compraGadoItemService.GetAll(pageSize, pageIndex);
+        return compraGadoItemService.GetAll(pageSize, pageIndex, query);
     }
 
     [HttpPost]

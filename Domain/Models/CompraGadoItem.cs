@@ -1,10 +1,8 @@
 ﻿using Domain.Abstractions;
-using System;
-using System.Collections.Generic;
 
 namespace Domain.Models;
 
-public partial class CompraGadoItem :BaseEntity
+public partial class CompraGadoItem : BaseEntity
 {
     public CompraGadoItem(int idCompraGado, int idAnimal, int quantidade)
     {

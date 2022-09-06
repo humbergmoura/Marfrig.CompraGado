@@ -79,6 +79,7 @@ public class CompraGadoService : ServiceBase
             foreach (var item in compraGadoDTO.compraGadoItemDTO)
             {
                 var compraGadoItem = new CompraGadoItem(item.IdCompraGado, item.IdAnimal, item.Quantidade);
+                compraGadoItem.Id = item.Id;
                 compraGadoItems.Add(compraGadoItem);
             }
 

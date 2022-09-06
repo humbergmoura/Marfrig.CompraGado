@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.txtId = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -272,6 +273,9 @@
             // Preco
             // 
             this.Preco.DataPropertyName = "Preco";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Preco.DefaultCellStyle = dataGridViewCellStyle1;
             this.Preco.HeaderText = "Preço";
             this.Preco.Name = "Preco";
             // 

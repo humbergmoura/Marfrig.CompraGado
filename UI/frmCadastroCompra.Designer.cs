@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grpAnimais = new System.Windows.Forms.GroupBox();
             this.btnProximo = new System.Windows.Forms.Button();
@@ -51,6 +54,7 @@
             this.lblQuantidade = new System.Windows.Forms.Label();
             this.txtPreco = new System.Windows.Forms.TextBox();
             this.lblPreco = new System.Windows.Forms.Label();
+            this.txtIdCompraGado = new System.Windows.Forms.TextBox();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdAnimal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdCompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,7 +94,7 @@
             this.grpAnimais.Controls.Add(this.btnAlterar);
             this.grpAnimais.Controls.Add(this.btnExcluir);
             this.grpAnimais.Controls.Add(this.btnAdicionar);
-            this.grpAnimais.Location = new System.Drawing.Point(12, 172);
+            this.grpAnimais.Location = new System.Drawing.Point(12, 165);
             this.grpAnimais.Name = "grpAnimais";
             this.grpAnimais.Size = new System.Drawing.Size(776, 343);
             this.grpAnimais.TabIndex = 18;
@@ -231,6 +235,7 @@
             // 
             // txtId
             // 
+            this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(50, 41);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(273, 23);
@@ -248,9 +253,9 @@
             // 
             this.groupBox1.Controls.Add(this.lblDe);
             this.groupBox1.Controls.Add(this.dtpEntrega);
-            this.groupBox1.Location = new System.Drawing.Point(9, 70);
+            this.groupBox1.Location = new System.Drawing.Point(12, 108);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(339, 56);
+            this.groupBox1.Size = new System.Drawing.Size(339, 51);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data de entrega";
@@ -258,7 +263,7 @@
             // cmbAnimal
             // 
             this.cmbAnimal.FormattingEnabled = true;
-            this.cmbAnimal.Location = new System.Drawing.Point(452, 92);
+            this.cmbAnimal.Location = new System.Drawing.Point(452, 76);
             this.cmbAnimal.Name = "cmbAnimal";
             this.cmbAnimal.Size = new System.Drawing.Size(327, 23);
             this.cmbAnimal.TabIndex = 26;
@@ -266,7 +271,7 @@
             // lblAnimais
             // 
             this.lblAnimais.AutoSize = true;
-            this.lblAnimais.Location = new System.Drawing.Point(396, 95);
+            this.lblAnimais.Location = new System.Drawing.Point(396, 80);
             this.lblAnimais.Name = "lblAnimais";
             this.lblAnimais.Size = new System.Drawing.Size(50, 15);
             this.lblAnimais.TabIndex = 25;
@@ -274,7 +279,7 @@
             // 
             // txtQuantidade
             // 
-            this.txtQuantidade.Location = new System.Drawing.Point(452, 132);
+            this.txtQuantidade.Location = new System.Drawing.Point(452, 115);
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(327, 23);
             this.txtQuantidade.TabIndex = 28;
@@ -282,7 +287,7 @@
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
-            this.lblQuantidade.Location = new System.Drawing.Point(374, 135);
+            this.lblQuantidade.Location = new System.Drawing.Point(374, 118);
             this.lblQuantidade.Name = "lblQuantidade";
             this.lblQuantidade.Size = new System.Drawing.Size(72, 15);
             this.lblQuantidade.TabIndex = 27;
@@ -290,7 +295,8 @@
             // 
             // txtPreco
             // 
-            this.txtPreco.Location = new System.Drawing.Point(63, 132);
+            this.txtPreco.Enabled = false;
+            this.txtPreco.Location = new System.Drawing.Point(63, 76);
             this.txtPreco.Name = "txtPreco";
             this.txtPreco.Size = new System.Drawing.Size(260, 23);
             this.txtPreco.TabIndex = 30;
@@ -298,11 +304,20 @@
             // lblPreco
             // 
             this.lblPreco.AutoSize = true;
-            this.lblPreco.Location = new System.Drawing.Point(17, 135);
+            this.lblPreco.Location = new System.Drawing.Point(17, 80);
             this.lblPreco.Name = "lblPreco";
             this.lblPreco.Size = new System.Drawing.Size(40, 15);
             this.lblPreco.TabIndex = 29;
             this.lblPreco.Text = "Preço:";
+            // 
+            // txtIdCompraGado
+            // 
+            this.txtIdCompraGado.Enabled = false;
+            this.txtIdCompraGado.Location = new System.Drawing.Point(268, 41);
+            this.txtIdCompraGado.Name = "txtIdCompraGado";
+            this.txtIdCompraGado.Size = new System.Drawing.Size(55, 23);
+            this.txtIdCompraGado.TabIndex = 31;
+            this.txtIdCompraGado.Visible = false;
             // 
             // Id
             // 
@@ -349,12 +364,18 @@
             // DataEntrega
             // 
             this.DataEntrega.DataPropertyName = "DataEntrega";
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataEntrega.HeaderText = "Data Entrega";
             this.DataEntrega.Name = "DataEntrega";
             // 
             // Preco
             // 
             this.Preco.DataPropertyName = "Preco";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Preco.DefaultCellStyle = dataGridViewCellStyle2;
             this.Preco.HeaderText = "Preço";
             this.Preco.Name = "Preco";
             this.Preco.Width = 120;
@@ -362,6 +383,9 @@
             // ValorTotal
             // 
             this.ValorTotal.DataPropertyName = "Total";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ValorTotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.ValorTotal.HeaderText = "Valor Total";
             this.ValorTotal.Name = "ValorTotal";
             this.ValorTotal.Width = 120;
@@ -384,7 +408,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 523);
+            this.ClientSize = new System.Drawing.Size(800, 520);
             this.Controls.Add(this.txtPreco);
             this.Controls.Add(this.lblPreco);
             this.Controls.Add(this.txtQuantidade);
@@ -398,6 +422,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.grpAnimais);
             this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.txtIdCompraGado);
             this.Name = "frmCadastroCompra";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -439,7 +464,10 @@
         private Label lblQuantidade;
         private TextBox txtPreco;
         private Label lblPreco;
+        private TextBox txtIdCompraGado;
         private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn IdAnimal;
+        private DataGridViewTextBoxColumn IdCompraGado;
         private DataGridViewTextBoxColumn IdPecuarista;
         private DataGridViewTextBoxColumn Animal;
         private DataGridViewTextBoxColumn Quantidade;
@@ -447,8 +475,6 @@
         private DataGridViewTextBoxColumn Preco;
         private DataGridViewTextBoxColumn ValorTotal;
         private DataGridViewTextBoxColumn CompraGado;
-        private DataGridViewTextBoxColumn IdCompraGado;
-        private DataGridViewTextBoxColumn IdAnimal;
         private DataGridViewTextBoxColumn Pecuarista;
     }
 }
