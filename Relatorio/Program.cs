@@ -17,7 +17,7 @@ namespace Relatorio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run();
+            Application.Run(new Visualizar());
         }
     }
 }

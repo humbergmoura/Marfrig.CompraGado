@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Relatorio\Relatorio.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="frmPecuarista.cs">
       <SubType>Form</SubType>
     </Compile>
