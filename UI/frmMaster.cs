@@ -1,3 +1,5 @@
+using Relatorio.Visualizador;
+
 namespace UI
 {
     public partial class frmComprasGado : Form
@@ -43,7 +45,7 @@ namespace UI
         private void mnuRelatoriosCompras_Click(object sender, EventArgs e)
         {
             mnuRelatoriosCompras.Enabled = false;
-            frmRelatorios compras = new frmRelatorios();
+            Visualizar compras = new Visualizar();
             compras.MdiParent = this;
             compras.Show();
         }
