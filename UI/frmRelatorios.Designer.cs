@@ -57,6 +57,8 @@
             this.rpvVisualizador.Size = new System.Drawing.Size(800, 600);
             this.rpvVisualizador.TabIndex = 0;
             this.rpvVisualizador.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+            this.rpvVisualizador.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.Percent;
+            this.rpvVisualizador.ZoomPercent = 200;
             // 
             // frmRelatorios
             // 
@@ -69,6 +71,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.frmRelatorios_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmRelatorios_FormClosed);
             this.Load += new System.EventHandler(this.frmRelatorios_Load);

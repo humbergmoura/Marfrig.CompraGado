@@ -141,7 +141,8 @@
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(283, 406);
+            this.btnAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAnterior.Location = new System.Drawing.Point(277, 460);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 23);
             this.btnAnterior.TabIndex = 10;
@@ -151,7 +152,8 @@
             // 
             // btnProximo
             // 
-            this.btnProximo.Location = new System.Drawing.Point(413, 406);
+            this.btnProximo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnProximo.Location = new System.Drawing.Point(407, 460);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(75, 23);
             this.btnProximo.TabIndex = 11;
@@ -161,6 +163,9 @@
             // 
             // dgvAnimal
             // 
+            this.dgvAnimal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAnimal.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvAnimal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAnimal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -177,7 +182,7 @@
             this.dgvAnimal.Name = "dgvAnimal";
             this.dgvAnimal.RowTemplate.Height = 25;
             this.dgvAnimal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAnimal.Size = new System.Drawing.Size(765, 226);
+            this.dgvAnimal.Size = new System.Drawing.Size(765, 280);
             this.dgvAnimal.TabIndex = 12;
             this.dgvAnimal.SelectionChanged += new System.EventHandler(this.dgvAnimal_SelectionChanged);
             // 
@@ -310,7 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 439);
+            this.ClientSize = new System.Drawing.Size(792, 491);
             this.Controls.Add(this.txtPreco);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.txtQuantidade);

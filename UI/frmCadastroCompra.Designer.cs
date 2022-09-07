@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grpAnimais = new System.Windows.Forms.GroupBox();
             this.btnProximo = new System.Windows.Forms.Button();
@@ -38,6 +38,17 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
             this.grvCompras = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdAnimal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdCompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdPecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Animal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Preco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValorTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
@@ -55,17 +66,6 @@
             this.txtPreco = new System.Windows.Forms.TextBox();
             this.lblPreco = new System.Windows.Forms.Label();
             this.txtIdCompraGado = new System.Windows.Forms.TextBox();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdAnimal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdCompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdPecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Animal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Preco = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValorTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompraGado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpAnimais.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grvCompras)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -86,6 +86,9 @@
             // 
             // grpAnimais
             // 
+            this.grpAnimais.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpAnimais.Controls.Add(this.btnProximo);
             this.grpAnimais.Controls.Add(this.btnAnterior);
             this.grpAnimais.Controls.Add(this.btnLimpar);
@@ -96,14 +99,15 @@
             this.grpAnimais.Controls.Add(this.btnAdicionar);
             this.grpAnimais.Location = new System.Drawing.Point(12, 165);
             this.grpAnimais.Name = "grpAnimais";
-            this.grpAnimais.Size = new System.Drawing.Size(776, 343);
+            this.grpAnimais.Size = new System.Drawing.Size(776, 378);
             this.grpAnimais.TabIndex = 18;
             this.grpAnimais.TabStop = false;
             this.grpAnimais.Text = "Animais";
             // 
             // btnProximo
             // 
-            this.btnProximo.Location = new System.Drawing.Point(388, 308);
+            this.btnProximo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnProximo.Location = new System.Drawing.Point(393, 343);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(75, 23);
             this.btnProximo.TabIndex = 7;
@@ -113,7 +117,8 @@
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(261, 308);
+            this.btnAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAnterior.Location = new System.Drawing.Point(266, 343);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 23);
             this.btnAnterior.TabIndex = 6;
@@ -136,7 +141,7 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal.Location = new System.Drawing.Point(623, 310);
+            this.lblTotal.Location = new System.Drawing.Point(623, 345);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotal.Size = new System.Drawing.Size(147, 21);
@@ -146,6 +151,9 @@
             // 
             // grvCompras
             // 
+            this.grvCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grvCompras.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.grvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grvCompras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -163,9 +171,94 @@
             this.grvCompras.Location = new System.Drawing.Point(6, 57);
             this.grvCompras.Name = "grvCompras";
             this.grvCompras.RowTemplate.Height = 25;
-            this.grvCompras.Size = new System.Drawing.Size(764, 240);
+            this.grvCompras.Size = new System.Drawing.Size(764, 280);
             this.grvCompras.TabIndex = 3;
             this.grvCompras.SelectionChanged += new System.EventHandler(this.grvCompras_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Width = 30;
+            // 
+            // IdAnimal
+            // 
+            this.IdAnimal.DataPropertyName = "IdAnimal";
+            this.IdAnimal.HeaderText = "IdAnimal";
+            this.IdAnimal.Name = "IdAnimal";
+            this.IdAnimal.Visible = false;
+            // 
+            // IdCompraGado
+            // 
+            this.IdCompraGado.DataPropertyName = "IdCompraGado";
+            this.IdCompraGado.HeaderText = "IdCompraGado";
+            this.IdCompraGado.Name = "IdCompraGado";
+            this.IdCompraGado.Visible = false;
+            // 
+            // IdPecuarista
+            // 
+            this.IdPecuarista.DataPropertyName = "IdPecuarista";
+            this.IdPecuarista.HeaderText = "IdPecuarista";
+            this.IdPecuarista.Name = "IdPecuarista";
+            this.IdPecuarista.Visible = false;
+            // 
+            // Animal
+            // 
+            this.Animal.DataPropertyName = "Animal";
+            this.Animal.HeaderText = "Animal";
+            this.Animal.Name = "Animal";
+            this.Animal.Width = 200;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.DataPropertyName = "Quantidade";
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
+            this.Quantidade.Width = 30;
+            // 
+            // DataEntrega
+            // 
+            this.DataEntrega.DataPropertyName = "DataEntrega";
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle4;
+            this.DataEntrega.HeaderText = "Data Entrega";
+            this.DataEntrega.Name = "DataEntrega";
+            // 
+            // Preco
+            // 
+            this.Preco.DataPropertyName = "Preco";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.Preco.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Preco.HeaderText = "Preço";
+            this.Preco.Name = "Preco";
+            this.Preco.Width = 120;
+            // 
+            // ValorTotal
+            // 
+            this.ValorTotal.DataPropertyName = "Total";
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ValorTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ValorTotal.HeaderText = "Valor Total";
+            this.ValorTotal.Name = "ValorTotal";
+            this.ValorTotal.Width = 120;
+            // 
+            // CompraGado
+            // 
+            this.CompraGado.DataPropertyName = "CompraGado";
+            this.CompraGado.HeaderText = "CompraGado";
+            this.CompraGado.Name = "CompraGado";
+            this.CompraGado.Visible = false;
+            // 
+            // Pecuarista
+            // 
+            this.Pecuarista.DataPropertyName = "Pecuarista";
+            this.Pecuarista.HeaderText = "Pecuarista";
+            this.Pecuarista.Name = "Pecuarista";
+            this.Pecuarista.Width = 200;
             // 
             // btnAlterar
             // 
@@ -319,96 +412,11 @@
             this.txtIdCompraGado.TabIndex = 31;
             this.txtIdCompraGado.Visible = false;
             // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 30;
-            // 
-            // IdAnimal
-            // 
-            this.IdAnimal.DataPropertyName = "IdAnimal";
-            this.IdAnimal.HeaderText = "IdAnimal";
-            this.IdAnimal.Name = "IdAnimal";
-            this.IdAnimal.Visible = false;
-            // 
-            // IdCompraGado
-            // 
-            this.IdCompraGado.DataPropertyName = "IdCompraGado";
-            this.IdCompraGado.HeaderText = "IdCompraGado";
-            this.IdCompraGado.Name = "IdCompraGado";
-            this.IdCompraGado.Visible = false;
-            // 
-            // IdPecuarista
-            // 
-            this.IdPecuarista.DataPropertyName = "IdPecuarista";
-            this.IdPecuarista.HeaderText = "IdPecuarista";
-            this.IdPecuarista.Name = "IdPecuarista";
-            this.IdPecuarista.Visible = false;
-            // 
-            // Animal
-            // 
-            this.Animal.DataPropertyName = "Animal";
-            this.Animal.HeaderText = "Animal";
-            this.Animal.Name = "Animal";
-            this.Animal.Width = 200;
-            // 
-            // Quantidade
-            // 
-            this.Quantidade.DataPropertyName = "Quantidade";
-            this.Quantidade.HeaderText = "Quantidade";
-            this.Quantidade.Name = "Quantidade";
-            this.Quantidade.Width = 30;
-            // 
-            // DataEntrega
-            // 
-            this.DataEntrega.DataPropertyName = "DataEntrega";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataEntrega.HeaderText = "Data Entrega";
-            this.DataEntrega.Name = "DataEntrega";
-            // 
-            // Preco
-            // 
-            this.Preco.DataPropertyName = "Preco";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Preco.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Preco.HeaderText = "Preço";
-            this.Preco.Name = "Preco";
-            this.Preco.Width = 120;
-            // 
-            // ValorTotal
-            // 
-            this.ValorTotal.DataPropertyName = "Total";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.ValorTotal.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ValorTotal.HeaderText = "Valor Total";
-            this.ValorTotal.Name = "ValorTotal";
-            this.ValorTotal.Width = 120;
-            // 
-            // CompraGado
-            // 
-            this.CompraGado.DataPropertyName = "CompraGado";
-            this.CompraGado.HeaderText = "CompraGado";
-            this.CompraGado.Name = "CompraGado";
-            this.CompraGado.Visible = false;
-            // 
-            // Pecuarista
-            // 
-            this.Pecuarista.DataPropertyName = "Pecuarista";
-            this.Pecuarista.HeaderText = "Pecuarista";
-            this.Pecuarista.Name = "Pecuarista";
-            this.Pecuarista.Width = 200;
-            // 
             // frmCadastroCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 520);
+            this.ClientSize = new System.Drawing.Size(800, 555);
             this.Controls.Add(this.txtPreco);
             this.Controls.Add(this.lblPreco);
             this.Controls.Add(this.txtQuantidade);

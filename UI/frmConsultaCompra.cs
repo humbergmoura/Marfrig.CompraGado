@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Windows.Forms;
 using UI.Entities;
 using UI.Entities.Response;
 using UI.Services;
@@ -15,6 +16,7 @@ public partial class frmConsultaCompra : Form
     public frmConsultaCompra()
     {
         InitializeComponent();
+        grvCompras.AutoGenerateColumns = false;
         ListarCompraGadoAsync();
     }
 
@@ -45,7 +47,7 @@ public partial class frmConsultaCompra : Form
 
         btnAnterior.Enabled = listCompraGadoItems.Pagination == null ? false : listCompraGadoItems.Pagination.HasPrevious;
         btnProximo.Enabled = listCompraGadoItems.Pagination == null ? false : listCompraGadoItems.Pagination.HasNext;
-        LimparCampos();
+        LimparCamposAposPesquisa();
     }
 
     private async Task ListarPecuaristasAsync()
@@ -54,17 +56,22 @@ public partial class frmConsultaCompra : Form
         cmbPecuarista.DisplayMember = "nome";
 
         cmbPecuarista.DataSource = listPecuaristas.Data;
-        cmbPecuarista.Items.Add("Selecione");
         cmbPecuarista.Refresh();
+        cmbPecuarista.Items.Add("Selecione");
     }
 
     private void LimparCampos()
     {
-        grvCompras.ClearSelection();
-        txtId.Text = "";
+        LimparCamposAposPesquisa();
         cmbPecuarista.SelectedItem = null;
         dtpDe.Text = DateTime.Now.AddMonths(-1).ToString();
         dtpAte.Text = DateTime.Now.ToString();
+    }
+
+    private void LimparCamposAposPesquisa()
+    {
+        grvCompras.ClearSelection();
+        txtId.Text = "";
         _id = null;
         query = "";
     }
