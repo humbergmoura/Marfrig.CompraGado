@@ -1,4 +1,6 @@
-﻿using UI.Entities;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using UI.Entities;
 using UI.Entities.Response;
 using UI.Services;
 
@@ -9,6 +11,7 @@ public partial class frmAnimal : Form
     private int? _id = null;
     private string pagina = "1";
     private ListResponse<Pecuarista> listPecuaristas;
+    private static int countlength = 0;
 
     public frmAnimal()
     {
@@ -21,7 +24,7 @@ public partial class frmAnimal : Form
     private async Task ListarAnimalAsync()
     {
         var listAnimals = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex={pagina}", "Não foi possível obter o animais: ");
-        listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
+        listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=1000&pageIndex=1", "Não foi possível obter o pecuarista: ");
         foreach (var item in listAnimals.Data)
         {
             item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.IdPecuarista).nome;
@@ -30,6 +33,7 @@ public partial class frmAnimal : Form
         dgvAnimal.Refresh();
         btnAnterior.Enabled = listAnimals.Pagination.HasPrevious;
         btnProximo.Enabled = listAnimals.Pagination.HasNext;
+        ListarPecuaristasAsync();
         LimparCampos();
         DesativarCampos();
     }
@@ -48,11 +52,11 @@ public partial class frmAnimal : Form
             listResponse.Data = new List<Animal>();
             if (_id != null)
             {
-                listResponse.Data.Add(new Animal { Id = (int)_id, Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
+                listResponse.Data.Add(new Animal { Id = (int)_id, Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
             }
             else
             {
-                listResponse.Data.Add(new Animal { Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
+                listResponse.Data.Add(new Animal { Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
             }
 
             await new AnimalServices().Save(listResponse, "Animais/SalvarAnimal", "Não foi possível gravar o animal: ");
@@ -103,12 +107,14 @@ public partial class frmAnimal : Form
         txtDescricao.Focus();
         cmbPecuarista.SelectedItem = null;
         _id = null;
+        DesativarCampos();
     }
 
     private void AtivarCampos()
     {
         btnAlterar.Enabled = true;
         btnExcluir.Enabled = true;
+        btnAdicionar.Enabled = false;
         txtDescricao.Focus();
     }
 
@@ -116,6 +122,7 @@ public partial class frmAnimal : Form
     {
         btnAlterar.Enabled = false;
         btnExcluir.Enabled = false;
+        btnAdicionar.Enabled = true;
     }
     #endregion
 
@@ -184,5 +191,24 @@ public partial class frmAnimal : Form
     private void btnLimpar_Click(object sender, EventArgs e)
     {
         LimparCampos();
+    }
+
+    private void txtPreco_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (!char.IsControl(e.KeyChar) || !char.IsDigit(e.KeyChar) || (e.KeyChar != ','))
+        {
+            e.Handled = true;
+        }
+    }
+
+    private void txtPreco_Leave(object sender, EventArgs e)
+    {
+        var regex = new Regex(@"^\d+(\.\d{2})?$");
+        if (regex.IsMatch(txtPreco.Text))
+        {
+            var culture = new CultureInfo("pt-BR");
+            var valor = Convert.ToDecimal(txtPreco.Text, culture);
+            txtPreco.Text = valor.ToString("C2");
+        }
     }
 }

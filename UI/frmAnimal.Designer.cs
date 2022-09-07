@@ -31,13 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtId = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblDescricao = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
-            this.txtPreco = new System.Windows.Forms.TextBox();
             this.lblPreco = new System.Windows.Forms.Label();
-            this.txtQuantidade = new System.Windows.Forms.TextBox();
             this.lblQuantidade = new System.Windows.Forms.Label();
             this.lblPecuarista = new System.Windows.Forms.Label();
             this.cmbPecuarista = new System.Windows.Forms.ComboBox();
@@ -45,17 +42,20 @@
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProximo = new System.Windows.Forms.Button();
             this.dgvAnimal = new System.Windows.Forms.DataGridView();
-            this.animalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnAlterar = new System.Windows.Forms.Button();
-            this.btnExcluir = new System.Windows.Forms.Button();
-            this.btnAdicionar = new System.Windows.Forms.Button();
-            this.btnLimpar = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Preco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdPecuarista = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.animalBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnAlterar = new System.Windows.Forms.Button();
+            this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnAdicionar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
+            this.txtQuantidade = new System.Windows.Forms.MaskedTextBox();
+            this.txtId = new System.Windows.Forms.MaskedTextBox();
+            this.txtPreco = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pecuaristaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnimal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.animalBindingSource)).BeginInit();
@@ -66,15 +66,7 @@
             this.txtDescricao.Location = new System.Drawing.Point(88, 82);
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.Size = new System.Drawing.Size(264, 23);
-            this.txtDescricao.TabIndex = 10;
-            // 
-            // txtId
-            // 
-            this.txtId.Enabled = false;
-            this.txtId.Location = new System.Drawing.Point(88, 53);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(264, 23);
-            this.txtId.TabIndex = 9;
+            this.txtDescricao.TabIndex = 2;
             // 
             // lblTitulo
             // 
@@ -107,13 +99,6 @@
             this.lblId.TabIndex = 6;
             this.lblId.Text = "Id:";
             // 
-            // txtPreco
-            // 
-            this.txtPreco.Location = new System.Drawing.Point(88, 111);
-            this.txtPreco.Name = "txtPreco";
-            this.txtPreco.Size = new System.Drawing.Size(264, 23);
-            this.txtPreco.TabIndex = 12;
-            // 
             // lblPreco
             // 
             this.lblPreco.AutoSize = true;
@@ -122,13 +107,6 @@
             this.lblPreco.Size = new System.Drawing.Size(40, 15);
             this.lblPreco.TabIndex = 11;
             this.lblPreco.Text = "Preço:";
-            // 
-            // txtQuantidade
-            // 
-            this.txtQuantidade.Location = new System.Drawing.Point(485, 82);
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(264, 23);
-            this.txtQuantidade.TabIndex = 14;
             // 
             // lblQuantidade
             // 
@@ -154,7 +132,7 @@
             this.cmbPecuarista.Location = new System.Drawing.Point(485, 111);
             this.cmbPecuarista.Name = "cmbPecuarista";
             this.cmbPecuarista.Size = new System.Drawing.Size(264, 23);
-            this.cmbPecuarista.TabIndex = 16;
+            this.cmbPecuarista.TabIndex = 5;
             this.cmbPecuarista.Text = "Selecione";
             // 
             // pecuaristaBindingSource
@@ -166,7 +144,7 @@
             this.btnAnterior.Location = new System.Drawing.Point(283, 406);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 23);
-            this.btnAnterior.TabIndex = 17;
+            this.btnAnterior.TabIndex = 10;
             this.btnAnterior.Text = "<";
             this.btnAnterior.UseVisualStyleBackColor = true;
             this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
@@ -176,7 +154,7 @@
             this.btnProximo.Location = new System.Drawing.Point(413, 406);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(75, 23);
-            this.btnProximo.TabIndex = 18;
+            this.btnProximo.TabIndex = 11;
             this.btnProximo.Text = ">";
             this.btnProximo.UseVisualStyleBackColor = true;
             this.btnProximo.Click += new System.EventHandler(this.btnProximo_Click);
@@ -200,54 +178,8 @@
             this.dgvAnimal.RowTemplate.Height = 25;
             this.dgvAnimal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAnimal.Size = new System.Drawing.Size(765, 226);
-            this.dgvAnimal.TabIndex = 19;
+            this.dgvAnimal.TabIndex = 12;
             this.dgvAnimal.SelectionChanged += new System.EventHandler(this.dgvAnimal_SelectionChanged);
-            // 
-            // animalBindingSource
-            // 
-            this.animalBindingSource.DataSource = typeof(UI.Entities.Animal);
-            // 
-            // btnAlterar
-            // 
-            this.btnAlterar.Enabled = false;
-            this.btnAlterar.Location = new System.Drawing.Point(186, 145);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 22;
-            this.btnAlterar.Text = "Alterar";
-            this.btnAlterar.UseVisualStyleBackColor = true;
-            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
-            // 
-            // btnExcluir
-            // 
-            this.btnExcluir.Enabled = false;
-            this.btnExcluir.Location = new System.Drawing.Point(99, 145);
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 21;
-            this.btnExcluir.Text = "Excluir";
-            this.btnExcluir.UseVisualStyleBackColor = true;
-            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
-            // 
-            // btnAdicionar
-            // 
-            this.btnAdicionar.Location = new System.Drawing.Point(12, 145);
-            this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(75, 23);
-            this.btnAdicionar.TabIndex = 20;
-            this.btnAdicionar.Text = "Adicionar";
-            this.btnAdicionar.UseVisualStyleBackColor = true;
-            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Location = new System.Drawing.Point(277, 145);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpar.TabIndex = 23;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // Id
             // 
@@ -294,11 +226,94 @@
             this.IdPecuarista.Visible = false;
             this.IdPecuarista.Width = 5;
             // 
+            // animalBindingSource
+            // 
+            this.animalBindingSource.DataSource = typeof(UI.Entities.Animal);
+            // 
+            // btnAlterar
+            // 
+            this.btnAlterar.Enabled = false;
+            this.btnAlterar.Location = new System.Drawing.Point(186, 145);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(75, 23);
+            this.btnAlterar.TabIndex = 8;
+            this.btnAlterar.Text = "Alterar";
+            this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            // 
+            // btnExcluir
+            // 
+            this.btnExcluir.Enabled = false;
+            this.btnExcluir.Location = new System.Drawing.Point(99, 145);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(75, 23);
+            this.btnExcluir.TabIndex = 7;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
+            // btnAdicionar
+            // 
+            this.btnAdicionar.Location = new System.Drawing.Point(12, 145);
+            this.btnAdicionar.Name = "btnAdicionar";
+            this.btnAdicionar.Size = new System.Drawing.Size(75, 23);
+            this.btnAdicionar.TabIndex = 6;
+            this.btnAdicionar.Text = "Adicionar";
+            this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Location = new System.Drawing.Point(277, 145);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpar.TabIndex = 9;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // txtQuantidade
+            // 
+            this.txtQuantidade.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtQuantidade.HidePromptOnLeave = true;
+            this.txtQuantidade.Location = new System.Drawing.Point(485, 82);
+            this.txtQuantidade.Mask = "00000000";
+            this.txtQuantidade.Name = "txtQuantidade";
+            this.txtQuantidade.Size = new System.Drawing.Size(264, 23);
+            this.txtQuantidade.TabIndex = 3;
+            this.txtQuantidade.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtQuantidade.ValidatingType = typeof(int);
+            // 
+            // txtId
+            // 
+            this.txtId.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtId.Enabled = false;
+            this.txtId.HidePromptOnLeave = true;
+            this.txtId.Location = new System.Drawing.Point(88, 53);
+            this.txtId.Mask = "00000000";
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(264, 23);
+            this.txtId.TabIndex = 1;
+            this.txtId.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtId.ValidatingType = typeof(int);
+            // 
+            // txtPreco
+            // 
+            this.txtPreco.Location = new System.Drawing.Point(88, 111);
+            this.txtPreco.Name = "txtPreco";
+            this.txtPreco.Size = new System.Drawing.Size(264, 23);
+            this.txtPreco.TabIndex = 4;
+            this.txtPreco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPreco_KeyPress);
+            this.txtPreco.Leave += new System.EventHandler(this.txtPreco_Leave);
+            // 
             // frmAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 439);
+            this.Controls.Add(this.txtPreco);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtQuantidade);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnExcluir);
@@ -308,12 +323,9 @@
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.cmbPecuarista);
             this.Controls.Add(this.lblPecuarista);
-            this.Controls.Add(this.txtQuantidade);
             this.Controls.Add(this.lblQuantidade);
-            this.Controls.Add(this.txtPreco);
             this.Controls.Add(this.lblPreco);
             this.Controls.Add(this.txtDescricao);
-            this.Controls.Add(this.txtId);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblDescricao);
             this.Controls.Add(this.lblId);
@@ -334,13 +346,10 @@
         #endregion
 
         private TextBox txtDescricao;
-        private TextBox txtId;
         private Label lblTitulo;
         private Label lblDescricao;
         private Label lblId;
-        private TextBox txtPreco;
         private Label lblPreco;
-        private TextBox txtQuantidade;
         private Label lblQuantidade;
         private Label lblPecuarista;
         private ComboBox cmbPecuarista;
@@ -359,5 +368,8 @@
         private DataGridViewTextBoxColumn Preco;
         private DataGridViewTextBoxColumn Pecuarista;
         private DataGridViewTextBoxColumn IdPecuarista;
+        private MaskedTextBox txtQuantidade;
+        private MaskedTextBox txtId;
+        private TextBox txtPreco;
     }
 }

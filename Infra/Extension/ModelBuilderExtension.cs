@@ -1,5 +1,5 @@
 ﻿using Domain.Abstractions;
-using Infra.Abstractions;
+using Infra.Base.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

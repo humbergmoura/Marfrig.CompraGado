@@ -65,12 +65,14 @@ public partial class frmPecuarista : Form
         txtId.Text = "";
         txtNome.Text = "";
         txtNome.Focus();
+        DesativarCampos();
     }
 
     private void AtivarCampos()
     {
         btnAlterar.Enabled = true;
         btnExcluir.Enabled = true;
+        btnAdicionar.Enabled = false;
         txtNome.Focus();
     }
 
@@ -78,6 +80,7 @@ public partial class frmPecuarista : Form
     {
         btnAlterar.Enabled = false;
         btnExcluir.Enabled = false;
+        btnAdicionar.Enabled = true;
     }
     #endregion
 
@@ -140,6 +143,11 @@ public partial class frmPecuarista : Form
         _pagina = _pagina + 1;
         pagina = _pagina.ToString();
         ListarPecuaristasAsync();
+    }
+
+    private void btnLimpar_Click(object sender, EventArgs e)
+    {
+        LimparCampos();
     }
 
     private void dgvPecuarista_SelectionChanged(object sender, EventArgs e)

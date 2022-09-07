@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infra.Abstractions
+namespace Infra.Base.Abstractions
 {
     public abstract class EntityMapping<TEntity> where TEntity : BaseEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Domain.Abstractions;
 using Domain.Models;
-using Infra.Abstractions;
+using Infra.Base.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

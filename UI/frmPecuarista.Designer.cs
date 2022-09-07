@@ -41,6 +41,7 @@
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPecuarista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,16 +80,18 @@
             // 
             this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(89, 44);
+            this.txtId.MaxLength = 8;
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(264, 23);
-            this.txtId.TabIndex = 4;
+            this.txtId.TabIndex = 1;
             // 
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(89, 73);
+            this.txtNome.MaxLength = 250;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(264, 23);
-            this.txtNome.TabIndex = 5;
+            this.txtNome.TabIndex = 2;
             // 
             // dgvPecuarista
             // 
@@ -107,7 +110,7 @@
             this.dgvPecuarista.RowTemplate.Height = 25;
             this.dgvPecuarista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPecuarista.Size = new System.Drawing.Size(340, 177);
-            this.dgvPecuarista.TabIndex = 6;
+            this.dgvPecuarista.TabIndex = 9;
             this.dgvPecuarista.SelectionChanged += new System.EventHandler(this.dgvPecuarista_SelectionChanged);
             // 
             // Id
@@ -153,7 +156,7 @@
             this.btnAdicionar.Location = new System.Drawing.Point(13, 120);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(75, 23);
-            this.btnAdicionar.TabIndex = 9;
+            this.btnAdicionar.TabIndex = 3;
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
@@ -161,10 +164,10 @@
             // btnExcluir
             // 
             this.btnExcluir.Enabled = false;
-            this.btnExcluir.Location = new System.Drawing.Point(100, 120);
+            this.btnExcluir.Location = new System.Drawing.Point(101, 120);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 10;
+            this.btnExcluir.TabIndex = 4;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
@@ -172,19 +175,30 @@
             // btnAlterar
             // 
             this.btnAlterar.Enabled = false;
-            this.btnAlterar.Location = new System.Drawing.Point(187, 120);
+            this.btnAlterar.Location = new System.Drawing.Point(189, 120);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 11;
+            this.btnAlterar.TabIndex = 5;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Location = new System.Drawing.Point(277, 120);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpar.TabIndex = 6;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // frmPecuarista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 364);
+            this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnAdicionar);
@@ -221,5 +235,6 @@
         private Button btnAlterar;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nome;
+        private Button btnLimpar;
     }
 }
