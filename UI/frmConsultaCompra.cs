@@ -56,8 +56,7 @@ public partial class frmConsultaCompra : Form
         cmbPecuarista.DisplayMember = "nome";
 
         cmbPecuarista.DataSource = listPecuaristas.Data;
-        cmbPecuarista.Refresh();
-        cmbPecuarista.Items.Add("Selecione");
+        cmbPecuarista.Items.Insert(0, "Selecione");
     }
 
     private void LimparCampos()
