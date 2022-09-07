@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.rpvVisualizador = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -39,29 +40,45 @@
             this.lblTitulo.ForeColor = System.Drawing.SystemColors.Control;
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(1044, 32);
+            this.lblTitulo.Size = new System.Drawing.Size(800, 32);
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "Relatório de Compra de Gado";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rpvVisualizador
+            // 
+            this.rpvVisualizador.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rpvVisualizador.AutoSize = true;
+            this.rpvVisualizador.Location = new System.Drawing.Point(0, 32);
+            this.rpvVisualizador.Name = "ReportViewer";
+            this.rpvVisualizador.ServerReport.BearerToken = null;
+            this.rpvVisualizador.Size = new System.Drawing.Size(800, 600);
+            this.rpvVisualizador.TabIndex = 0;
             // 
             // frmRelatorios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 788);
+            this.ClientSize = new System.Drawing.Size(800, 632);
             this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.rpvVisualizador);
             this.Name = "frmRelatorios";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Activated += new System.EventHandler(this.frmRelatorios_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmRelatorios_FormClosed);
+            this.Load += new System.EventHandler(this.frmRelatorios_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private Label lblTitulo;
+        private Microsoft.Reporting.WinForms.ReportViewer rpvVisualizador;
     }
 }

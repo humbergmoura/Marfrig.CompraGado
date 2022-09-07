@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,6 +28,12 @@ namespace UI
         {
             frmComprasGado frmComprasGado = (frmComprasGado)(this.MdiParent);
             frmComprasGado.mnuRelatoriosCompras.Enabled = true;
+        }
+
+        private void frmRelatorios_Load(object sender, EventArgs e)
+        {
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.ComprasGado.rdlc";
+            rpvVisualizador.Refresh();
         }
     }
 }
