@@ -27,7 +27,7 @@ public partial class frmAnimal : Form
         listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=1000&pageIndex=1", "Não foi possível obter o pecuarista: ");
         foreach (var item in listAnimals.Data)
         {
-            item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.IdPecuarista).nome;
+            item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Id == item.IdPecuarista).Nome;
         }
         dgvAnimal.DataSource = listAnimals.Data;
         dgvAnimal.Refresh();
@@ -52,11 +52,11 @@ public partial class frmAnimal : Form
             listResponse.Data = new List<Animal>();
             if (_id != null)
             {
-                listResponse.Data.Add(new Animal { Id = (int)_id, Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
+                listResponse.Data.Add(new Animal { Id = (int)_id, Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Nome == cmbPecuarista.Text).Id });
             }
             else
             {
-                listResponse.Data.Add(new Animal { Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.nome == cmbPecuarista.Text).id });
+                listResponse.Data.Add(new Animal { Descricao = txtDescricao.Text, Preco = Convert.ToDecimal(txtPreco.Text.Replace("R$ ", "")), Quantidade = Convert.ToInt32(txtQuantidade.Text), IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Nome == cmbPecuarista.Text).Id });
             }
 
             await new AnimalServices().Save(listResponse, "Animais/SalvarAnimal", "Não foi possível gravar o animal: ");

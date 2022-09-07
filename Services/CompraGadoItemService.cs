@@ -38,42 +38,38 @@ public class CompraGadoItemService : ServiceBase
     {
         try
         {
-            IList<CompraGadoItem> result;
+            IQueryable<CompraGadoItem> compraGadoItem;
 
-            result = this.compraGadoItemRepository.GetAll();
+            compraGadoItem = this.compraGadoItemRepository.GetAllWithOthersEntities();
 
-            if (query.Id != null || query.Nome != null || query.DataDe != null || query.DataAte != null)
+            if (query != null)
             {
-                foreach (var item in result)
-                {
-                    item.CompraGado = compraGadoRepository.GetByIdAsync(item.IdCompraGado).Result;
-                }
                 if (query.Id != null)
                 {
-                    result = result.Where(x => x.Id == query.Id).ToList();
+                    compraGadoItem = compraGadoItem.Where(x => x.Id == query.Id);
                 }
                 if (query.Nome != null)
                 {
                     var pe = pecuaristaRepository.GetAll().Where(x => x.Nome.Contains(query.Nome));
                     foreach (var item in pe)
                     {
-                        result = result.Where(x => x.CompraGado.IdPecuarista == item.Id).ToList();
+                        compraGadoItem = compraGadoItem.Where(x => x.CompraGado.IdPecuarista == item.Id);
                     }
                 }
                 if (query.DataDe != null)
                 {
-                    result = result.Where(x => x.CompraGado.DataEntrega >= query.DataDe).ToList();
+                    compraGadoItem = compraGadoItem.Where(x => x.CompraGado.DataEntrega >= query.DataDe);
                 }
                 if (query.DataAte != null)
                 {
-                    result = result.Where(x => x.CompraGado.DataEntrega <= query.DataAte).ToList();
+                    compraGadoItem = compraGadoItem.Where(x => x.CompraGado.DataEntrega <= query.DataAte);
                 }
             }
 
-            var totalCount = result.Count();
-            if (result != null && totalCount > 0)
+            var totalCount = compraGadoItem.Count();
+            if (compraGadoItem != null && totalCount > 0)
             {
-                var data = result.Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderBy(e => e.Id).ToList();
+                var data = compraGadoItem.Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderBy(e => e.Id).ToList();
 
                 return new ListResponseResult<CompraGadoItem>
                 {

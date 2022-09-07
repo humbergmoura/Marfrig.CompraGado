@@ -24,7 +24,7 @@ public abstract class DatabaseRepository<TEntity> : IDatabaseRepository<TEntity>
         return await this.set.FindAsync(id);
     }
 
-    public IList<TEntity> GetAll(int PageNumber = -1, int PageSize = 10)
+    public IList<TEntity> GetAll(int PageIndex = 1, int PageSize = 10)
     {
         return this.set.ToList();
     }

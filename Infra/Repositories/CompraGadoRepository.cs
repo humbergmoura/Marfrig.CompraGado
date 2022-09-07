@@ -15,5 +15,21 @@ namespace Infra.Repositories
         public CompraGadoRepository(AppDbContext context) : base(context)
         {
         }
+
+        public IQueryable<CompraGado> GetAllWithOthersEntities()
+        {
+            return this.set
+                .Include(c => c.Pecuarista)
+                .AsQueryable();
+
+        }
+
+        public IQueryable<CompraGado> GetAllByPecuaristaId(long idPecuarista)
+        {
+            return this.set
+                .Include(c => c.Pecuarista)
+                .Where(c => c.IdPecuarista == idPecuarista)
+                .AsQueryable();
+        }
     }
 }

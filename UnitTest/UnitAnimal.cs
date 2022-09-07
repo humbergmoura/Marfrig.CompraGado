@@ -21,9 +21,9 @@ public class UnitAnimal
     {
         var retorno = _service.Connect(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = Assert.Throws<Exception>(() => retorno.Start());
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.Equals(retorno, expected);
     }
 
     [Test]

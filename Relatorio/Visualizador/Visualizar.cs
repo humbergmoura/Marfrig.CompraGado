@@ -1,7 +1,6 @@
 ﻿using Relatorio.Entities;
 using Relatorio.Services;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -21,12 +20,10 @@ namespace Relatorio.Visualizador
             var listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
             var listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
             var listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
-            var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=10&pageIndex=1", "Não foi possível obter o CompraGado: ");
 
             foreach (var item in listCompraGadoItems)
             {
-                item.CompraGado = listCompraGado.FirstOrDefault(x => x.Id == item.IdCompraGado);
-                item.DataEntrega = listCompraGado.FirstOrDefault(x => x.Id == item.IdCompraGado).DataEntrega;
+                item.DataEntrega = item.CompraGado.DataEntrega;
                 item.Preco = listAnimais.FirstOrDefault(x => x.Id == item.IdAnimal).Preco;
                 item.Animal = listAnimais.FirstOrDefault(x => x.Id == item.IdAnimal).Descricao;
                 item.Pecuarista = listPecuaristas.FirstOrDefault(x => x.id == item.CompraGado.IdPecuarista).nome;

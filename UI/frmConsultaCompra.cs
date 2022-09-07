@@ -25,18 +25,16 @@ public partial class frmConsultaCompra : Form
         var listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex={pagina}{query}", "Não foi possível obter o animais: ");
         var listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=100&pageIndex=1", "Não foi possível obter o animais: ");
         listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
-        var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=100&pageIndex=1", "Não foi possível obter o CompraGado: ");
 
         if (listCompraGadoItems.Data != null)
         {
             foreach (var item in listCompraGadoItems.Data)
             {
-                item.CompraGado = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado);
-                item.DataEntrega = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado).DataEntrega;
+                item.DataEntrega = item.CompraGado.DataEntrega;
                 item.Preco = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Preco;
                 item.Animal = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Descricao;
-                item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).nome;
-                item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).id;
+                item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Id == item.CompraGado.IdPecuarista).Nome;
+                item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Id == item.CompraGado.IdPecuarista).Id;
                 item.Total = Math.Round(item.Preco * item.Quantidade, 2);
             }
         }
@@ -45,8 +43,8 @@ public partial class frmConsultaCompra : Form
         grvCompras.Refresh();
         ListarPecuaristasAsync();
 
-        btnAnterior.Enabled = listCompraGadoItems.Pagination.HasPrevious;
-        btnProximo.Enabled = listCompraGadoItems.Pagination.HasNext;
+        btnAnterior.Enabled = listCompraGadoItems.Pagination == null ? false : listCompraGadoItems.Pagination.HasPrevious;
+        btnProximo.Enabled = listCompraGadoItems.Pagination == null ? false : listCompraGadoItems.Pagination.HasNext;
         LimparCampos();
     }
 

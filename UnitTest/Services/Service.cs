@@ -16,6 +16,7 @@ public class Service<TEntity> where TEntity : class
             {
                 return response.IsSuccessStatusCode;
             }
+            throw new Exception();
         }
     }
 

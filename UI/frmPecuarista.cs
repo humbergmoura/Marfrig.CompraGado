@@ -42,11 +42,11 @@ public partial class frmPecuarista : Form
             listResponse.Data = new List<Pecuarista>();
             if (_id != null)
             {
-                listResponse.Data.Add(new Pecuarista { id = (int)_id, nome = txtNome.Text });
+                listResponse.Data.Add(new Pecuarista { Id = (int)_id, Nome = txtNome.Text });
             }
             else
             {
-                listResponse.Data.Add(new Pecuarista { nome = txtNome.Text });
+                listResponse.Data.Add(new Pecuarista { Nome = txtNome.Text });
             }
 
             await new PecuaristaServices().Save(listResponse, "Pecuarista/SalvarPecuarista", "Não foi possível gravar o pecuarista: ");

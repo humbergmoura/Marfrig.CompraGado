@@ -25,16 +25,16 @@ public partial class frmCadastroCompra : Form
         listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex={pagina}", "Não foi possível obter o animais: ");
         listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=100&pageIndex=1", "Não foi possível obter o animais: ");
         listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
-        var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=100&pageIndex=1", "Não foi possível obter o CompraGado: ");
+        //var listCompraGado = await new CompraGadoServices().GetAll($"CompraGado/BuscarCompraGado?pageSize=100&pageIndex=1", "Não foi possível obter o CompraGado: ");
         decimal total = 0;
         foreach (var item in listCompraGadoItems.Data)
         {
-            item.CompraGado = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado);
-            item.DataEntrega = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado).DataEntrega;
+            //item.CompraGado = listCompraGado.Data.FirstOrDefault(e => e.Id == item.IdCompraGado);
+            item.DataEntrega = item.CompraGado.DataEntrega;
             item.Preco = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Preco;
             item.Animal = listAnimais.Data.FirstOrDefault(e => e.Id == item.IdAnimal).Descricao;
-            item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).nome;
-            item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.id == item.CompraGado.IdPecuarista).id;
+            item.Pecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Id == item.CompraGado.IdPecuarista).Nome;
+            item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(e => e.Id == item.CompraGado.IdPecuarista).Id;
             item.Total = Math.Round(item.Preco * item.Quantidade, 2);
             total += item.Total;
         }

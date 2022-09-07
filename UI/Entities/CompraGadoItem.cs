@@ -20,6 +20,5 @@ public class CompraGadoItem
     public string Pecuarista { get; set; }
     [JsonIgnore]
     public string Animal { get; set; } = string.Empty;
-    [JsonIgnore]
     public CompraGado CompraGado { get; set; }
 }
