@@ -27,16 +27,14 @@ namespace Relatorio.Services.Base
                     {
                         var jsonString = await response.Content.ReadAsStringAsync();
                         dynamic stringJson = JObject.Parse(jsonString);
-
-                        var responseData = JObject.Parse(stringJson.GetValue("data").ToString());
-                        var objectData = responseData.GetValue("$values");
+                        var responseData = JArray.Parse(stringJson.GetValue("data").ToString());
 
                         if (stringJson == null)
                         {
                             return null;
                         }
 
-                        var listEntity = JsonConvert.DeserializeObject<TEntity[]>(objectData.ToString());
+                        var listEntity = JsonConvert.DeserializeObject<TEntity[]>(responseData.ToString());
                         return listEntity;
                     }
                     else

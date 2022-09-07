@@ -32,7 +32,7 @@ namespace UI
 
         private void frmRelatorios_Load(object sender, EventArgs e)
         {
-            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.ComprasGado.rdlc";
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.ReportTest.rdlc";
             rpvVisualizador.RefreshReport();
         }
     }

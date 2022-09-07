@@ -114,6 +114,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Relatorios\CompraGado.rdlc" />
+    <EmbeddedResource Include="Relatorios\ReportTest.rdlc" />
     <EmbeddedResource Include="Visualizador\Visualizar.resx">
       <DependentUpon>Visualizar.cs</DependentUpon>
     </EmbeddedResource>
