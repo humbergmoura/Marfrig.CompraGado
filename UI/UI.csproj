@@ -9,10 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ReportDefinitions\CompraGado.rdlc" />
     <None Remove="ReportDefinitions\ReportTest.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="ReportDefinitions\CompraGado.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportDefinitions\ReportTest.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
