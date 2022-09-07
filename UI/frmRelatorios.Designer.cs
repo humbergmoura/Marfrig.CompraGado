@@ -56,6 +56,7 @@
             this.rpvVisualizador.ServerReport.BearerToken = null;
             this.rpvVisualizador.Size = new System.Drawing.Size(800, 600);
             this.rpvVisualizador.TabIndex = 0;
+            this.rpvVisualizador.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
             // 
             // frmRelatorios
             // 

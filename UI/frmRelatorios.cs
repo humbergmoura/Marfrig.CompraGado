@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Entities;
+using UI.Services;
 
 namespace UI
 {
@@ -30,10 +32,42 @@ namespace UI
             frmComprasGado.mnuRelatoriosCompras.Enabled = true;
         }
 
-        private void frmRelatorios_Load(object sender, EventArgs e)
+        private async void frmRelatorios_Load(object sender, EventArgs e)
         {
-            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.CompraGado.rdlc";
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.ReportTest.rdlc";
             rpvVisualizador.RefreshReport();
+
+            var listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
+            var listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
+            var listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
+
+            foreach (var item in listCompraGadoItems.Data)
+            {
+                item.DataEntrega = item.CompraGado.DataEntrega;
+                item.Preco = listAnimais.Data.FirstOrDefault(x => x.Id == item.IdAnimal).Preco;
+                item.Animal = listAnimais.Data.FirstOrDefault(x => x.Id == item.IdAnimal).Descricao;
+                item.Pecuarista = listPecuaristas.Data.FirstOrDefault(x => x.Id == item.CompraGado.IdPecuarista).Nome;
+                item.IdPecuarista = listPecuaristas.Data.FirstOrDefault(x => x.Id == item.CompraGado.IdPecuarista).Id;
+                item.Total = Math.Round(item.Preco * item.Quantidade, 2);
+            }
+
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(CompraGadoItem));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (CompraGadoItem item in listCompraGadoItems.Data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.CompraGado.rdlc";
+            var dataSource = new Microsoft.Reporting.WinForms.ReportDataSource("dsCompraGado", table);
+            this.rpvVisualizador.LocalReport.DataSources.Clear();
+            this.rpvVisualizador.LocalReport.DataSources.Add(dataSource);
+            this.rpvVisualizador.RefreshReport();
         }
     }
 }
