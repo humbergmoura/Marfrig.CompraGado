@@ -38,15 +38,16 @@
             this.rpvPrincipal.Location = new System.Drawing.Point(0, 0);
             this.rpvPrincipal.Name = "rpvPrincipal";
             this.rpvPrincipal.ServerReport.BearerToken = null;
-            this.rpvPrincipal.Size = new System.Drawing.Size(967, 712);
+            this.rpvPrincipal.Size = new System.Drawing.Size(642, 712);
             this.rpvPrincipal.TabIndex = 0;
             // 
             // Visualizar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 712);
+            this.ClientSize = new System.Drawing.Size(642, 712);
             this.Controls.Add(this.rpvPrincipal);
+            this.KeyPreview = true;
             this.Name = "Visualizar";
             this.Text = "Visualizar";
             this.Load += new System.EventHandler(this.Visualizar_Load);
