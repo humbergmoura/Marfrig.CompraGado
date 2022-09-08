@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grpAnimais = new System.Windows.Forms.GroupBox();
             this.btnProximo = new System.Windows.Forms.Button();
@@ -138,16 +138,14 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal.Location = new System.Drawing.Point(623, 345);
+            this.lblTotal.Location = new System.Drawing.Point(474, 345);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblTotal.Size = new System.Drawing.Size(147, 21);
+            this.lblTotal.Size = new System.Drawing.Size(296, 21);
             this.lblTotal.TabIndex = 4;
-            this.lblTotal.Text = "Total R$ 210.000,00";
-            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotal.Text = "Total R$ 0,00";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // grvCompras
             // 
@@ -220,18 +218,18 @@
             // DataEntrega
             // 
             this.DataEntrega.DataPropertyName = "DataEntrega";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.DataEntrega.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataEntrega.HeaderText = "Data Entrega";
             this.DataEntrega.Name = "DataEntrega";
             // 
             // Preco
             // 
             this.Preco.DataPropertyName = "Preco";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.Preco.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Preco.DefaultCellStyle = dataGridViewCellStyle2;
             this.Preco.HeaderText = "Preço";
             this.Preco.Name = "Preco";
             this.Preco.Width = 120;
@@ -239,9 +237,9 @@
             // ValorTotal
             // 
             this.ValorTotal.DataPropertyName = "Total";
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.ValorTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ValorTotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.ValorTotal.HeaderText = "Valor Total";
             this.ValorTotal.Name = "ValorTotal";
             this.ValorTotal.Width = 120;
@@ -438,7 +436,6 @@
             this.Activated += new System.EventHandler(this.frmCadastroCompra_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCadastroCompra_FormClosed);
             this.grpAnimais.ResumeLayout(false);
-            this.grpAnimais.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grvCompras)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
