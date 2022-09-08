@@ -40,12 +40,19 @@ namespace UI
             consultaCompra.Show();
         }
 
-        private void mnuRelatoriosCompras_Click(object sender, EventArgs e)
+        private async void mnuRelatoriosCompras_Click(object sender, EventArgs e)
         {
+            string pathRelatorio = "UI.ReportDefinitions.CompraGado.rdlc";
+            string nomeDataSet = "dsCompraGado";
+            string query = "";
+
             mnuRelatoriosCompras.Enabled = false;
             frmRelatorios compras = new frmRelatorios();
+            await compras.Relatorio(pathRelatorio, query, nomeDataSet);
             compras.MdiParent = this;
             compras.Show();
+
+
         }
 
         private void mnuSobreAjuda_Click(object sender, EventArgs e)

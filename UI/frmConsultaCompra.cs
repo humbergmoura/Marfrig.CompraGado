@@ -105,9 +105,24 @@ public partial class frmConsultaCompra : Form
         ListarCompraGadoAsync(query);
     }
 
-    private void btnImprimir_Click(object sender, EventArgs e)
+    private async void btnImprimir_Click(object sender, EventArgs e)
     {
+        if (!string.IsNullOrEmpty(cmbPecuarista.Text))
+        {
+            query += $"&Nome={cmbPecuarista.Text}";
+        }
+        if (!string.IsNullOrEmpty(txtId.Text))
+        {
+            query += $"&Id={txtId.Text}";
+        }
 
+        string pathRelatorio = "UI.ReportDefinitions.CompraGado.rdlc";
+        string nomeDataSet = "dsCompraGado";
+
+        frmRelatorios compras = new frmRelatorios();
+        await compras.Relatorio(pathRelatorio, query, nomeDataSet);
+        compras.MdiParent = this.MdiParent;
+        compras.Show();
     }
 
     private void btnLimpar_Click(object sender, EventArgs e)

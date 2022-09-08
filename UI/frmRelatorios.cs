@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Entities;
+using UI.Entities.Response;
 using UI.Services;
 
 namespace UI
@@ -34,11 +35,20 @@ namespace UI
 
         private async void frmRelatorios_Load(object sender, EventArgs e)
         {
-            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.ReportTest.rdlc";
+            //string pathRelatorio = "UI.ReportDefinitions.CompraGado.rdlc";
+            //string nomeDataSet = "dsCompraGado";
+            //string query = "";
+
+            //await Relatorio(pathRelatorio, query, nomeDataSet);
+        }
+
+        public async Task Relatorio(string pathRelatorio, string query, string nomeDataSet)
+        {
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = pathRelatorio;
             rpvVisualizador.RefreshReport();
 
-            var listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
-            var listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=10&pageIndex=1", "Não foi possível obter o animais: ");
+            var listCompraGadoItems = await new CompraGadoItemServices().GetAll($"CompraGadoItem/BuscarCompraGadoItems?pageSize=100&pageIndex=1{query}", "Não foi possível obter o animais: ");
+            var listAnimais = await new AnimalServices().GetAll($"Animais/BuscarAnimais?pageSize=100&pageIndex=1", "Não foi possível obter o animais: ");
             var listPecuaristas = await new PecuaristaServices().GetAll($"Pecuarista/BuscarPecuaristas?pageSize=100&pageIndex=1", "Não foi possível obter o pecuarista: ");
 
             foreach (var item in listCompraGadoItems.Data)
@@ -51,6 +61,17 @@ namespace UI
                 item.Total = Math.Round(item.Preco * item.Quantidade, 2);
             }
 
+            DataTable table = ConverterParaDataTable(listCompraGadoItems);
+
+            rpvVisualizador.LocalReport.ReportEmbeddedResource = pathRelatorio;
+            var dataSource = new Microsoft.Reporting.WinForms.ReportDataSource(nomeDataSet, table);
+            this.rpvVisualizador.LocalReport.DataSources.Clear();
+            this.rpvVisualizador.LocalReport.DataSources.Add(dataSource);
+            this.rpvVisualizador.RefreshReport();
+        }
+
+        private static DataTable ConverterParaDataTable(ListResponse<CompraGadoItem> listCompraGadoItems)
+        {
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(CompraGadoItem));
             DataTable table = new DataTable();
             foreach (PropertyDescriptor prop in properties)
@@ -63,11 +84,7 @@ namespace UI
                 table.Rows.Add(row);
             }
 
-            rpvVisualizador.LocalReport.ReportEmbeddedResource = "UI.ReportDefinitions.CompraGado.rdlc";
-            var dataSource = new Microsoft.Reporting.WinForms.ReportDataSource("dsCompraGado", table);
-            this.rpvVisualizador.LocalReport.DataSources.Clear();
-            this.rpvVisualizador.LocalReport.DataSources.Add(dataSource);
-            this.rpvVisualizador.RefreshReport();
+            return table;
         }
     }
 }
