@@ -1,21 +1,17 @@
 ﻿using Domain.Models;
 using Infra.Repositories;
+using Microsoft.VisualBasic;
 using Services.Base;
 using Services.Dtos;
 using Services.ViewModels.ResponseResult;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services;
 
-public class AnimalService : ServiceBase
+public class AnimalService : ServiceBase<Animal>
 {
     private readonly AnimalRepository animalRepository;
 
-    public AnimalService(AnimalRepository animalRepository)
+    public AnimalService(AnimalRepository animalRepository) : base(animalRepository)
     {
         this.animalRepository = animalRepository;
     }
@@ -97,5 +93,18 @@ public class AnimalService : ServiceBase
             animalRepository.Delete(result);
         }
         return;
+    }
+
+    public Animal Mapper(AnimalDTO animalDTO)
+    {
+        Animal animal = new Animal(
+            animalDTO.Id,
+            animalDTO.Descricao,
+            animalDTO.Preco,
+            animalDTO.IdPecuarista,
+            animalDTO.Quantidade
+        );
+
+        return animal;
     }
 }

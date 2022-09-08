@@ -6,11 +6,11 @@ using Services.ViewModels.ResponseResult;
 
 namespace Services;
 
-public class PecuaristaService : ServiceBase
+public class PecuaristaService : ServiceBase<Pecuarista>
 {
     readonly PecuaristaRepository pecuaristaRepository;
 
-    public PecuaristaService(PecuaristaRepository _pecuaristaRepository)
+    public PecuaristaService(PecuaristaRepository _pecuaristaRepository) : base(_pecuaristaRepository)
     {
         this.pecuaristaRepository = _pecuaristaRepository;
     }

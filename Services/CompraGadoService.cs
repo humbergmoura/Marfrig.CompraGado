@@ -7,11 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace Services;
 
-public class CompraGadoService : ServiceBase
+public class CompraGadoService : ServiceBase<CompraGado>
 {
     readonly CompraGadoRepository compraGadoRepository;
 
-    public CompraGadoService(CompraGadoRepository _compraGadoRepository)
+    public CompraGadoService(CompraGadoRepository _compraGadoRepository) : base(_compraGadoRepository)
     {
         this.compraGadoRepository = _compraGadoRepository;
     }

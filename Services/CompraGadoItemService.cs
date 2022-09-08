@@ -6,13 +6,13 @@ using Services.ViewModels.ResponseResult;
 
 namespace Services;
 
-public class CompraGadoItemService : ServiceBase
+public class CompraGadoItemService : ServiceBase<CompraGadoItem>
 {
     readonly CompraGadoItemRepository compraGadoItemRepository;
     readonly CompraGadoRepository compraGadoRepository;
     readonly PecuaristaRepository pecuaristaRepository;
 
-    public CompraGadoItemService(CompraGadoItemRepository _compraGadoItemRepository, CompraGadoRepository compraGadoRepository, PecuaristaRepository pecuaristaRepository)
+    public CompraGadoItemService(CompraGadoItemRepository _compraGadoItemRepository, CompraGadoRepository compraGadoRepository, PecuaristaRepository pecuaristaRepository) : base(_compraGadoItemRepository)
     {
         this.compraGadoItemRepository = _compraGadoItemRepository;
         this.compraGadoRepository = compraGadoRepository;
