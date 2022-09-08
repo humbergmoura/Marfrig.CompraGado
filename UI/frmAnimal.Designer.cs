@@ -305,6 +305,7 @@
             // txtPreco
             // 
             this.txtPreco.Location = new System.Drawing.Point(88, 111);
+            this.txtPreco.MaxLength = 10;
             this.txtPreco.Name = "txtPreco";
             this.txtPreco.Size = new System.Drawing.Size(264, 23);
             this.txtPreco.TabIndex = 4;
