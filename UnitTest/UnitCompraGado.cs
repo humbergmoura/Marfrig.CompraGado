@@ -1,3 +1,4 @@
+using System.Net;
 using UnitTest.Entities;
 using UnitTest.Services;
 
@@ -19,11 +20,9 @@ public class UnitCompraGado
     [TestCase("https://localhost:7079/api/CompraGado/BuscarCompraGado")]
     public void TestConexao(string url)
     {
-        var retorno = _service.Connect(url);
+        var retorno = _service.GetAll(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
-
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.IsNotNull(retorno);
     }
 
     [Test]
@@ -32,9 +31,7 @@ public class UnitCompraGado
     {
         var retorno = _service.GetAll(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
-
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.IsNotNull(retorno);
     }
 
     [Test]
@@ -45,49 +42,49 @@ public class UnitCompraGado
     {
         var retorno = _service.GetById(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
-
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.IsNotNull(retorno);
+        Assert.IsTrue(retorno != null);
     }
 
     [Test]
     [TestCase("https://localhost:7079/api/CompraGado/SalvarCompraGado")]
-    public void TestNovo(string url)
+    [TestCase("https://localhost:7079/api/CompraGado/SalvarCompraGado")]
+    public async Task TestNovo(string url)
     {
-        _compraGado.IdPecuarista = 0;
+        _compraGado.IdPecuarista = 8;
         _compraGado.DataEntrega = DateTime.Now;
 
-        var retorno = _service.Save(_compraGado, url);
+        var retorno = await _service.Save(_compraGado, url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 
     [Test]
     [TestCase("https://localhost:7079/api/CompraGado/AtualizarCompraGado")]
-    public void TestAtualizar(string url)
+    public async Task TestAtualizar(string url)
     {
-        _compraGado.Id = 0;
-        _compraGado.IdPecuarista = 0;
+        _compraGado.Id = 27;
+        _compraGado.IdPecuarista = 10;
         _compraGado.DataEntrega = DateTime.Now;
 
-        var retorno = _service.Save(_compraGado, url);
+        var retorno = await _service.Update(_compraGado, url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 
     [Test]
-    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=21")]
-    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=22")]
-    public void TestExcluir(string url)
+    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=29")]
+    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=30")]
+    public async Task TestExcluir(string url)
     {
-        var retorno = _service.Delete(url);
+        var retorno = await _service.Delete(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 }

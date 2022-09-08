@@ -1,3 +1,5 @@
+using NUnit.Framework.Internal;
+using System.Net;
 using UnitTest.Entities;
 using UnitTest.Services;
 
@@ -17,13 +19,14 @@ public class UnitAnimal
 
     [Test]
     [TestCase("https://localhost:7079/api/Animais/BuscarAnimais")]
+    [TestCase("https://localhost:7079/api/animais/buscaranimais")]
     public void TestConexao(string url)
     {
         var retorno = _service.Connect(url);
 
-        var expected = Assert.Throws<Exception>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.Equals(retorno, expected);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 
     [Test]
@@ -32,9 +35,7 @@ public class UnitAnimal
     {
         var retorno = _service.GetAll(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
-
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.IsNotNull(retorno);
     }
 
     [Test]
@@ -45,53 +46,53 @@ public class UnitAnimal
     {
         var retorno = _service.GetById(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
-
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.IsNotNull(retorno);
+        Assert.IsTrue(retorno != null);
     }
 
     [Test]
     [TestCase("https://localhost:7079/api/Animais/SalvarAnimal")]
-    public void TestNovo(string url)
+    [TestCase("https://localhost:7079/api/animais/salvarAnimal")]
+    public async Task TestNovo(string url)
     {
-        _animal.Descricao = "";
-        _animal.Preco = 10m;
-        _animal.IdPecuarista = 8;
-        _animal.Quantidade = 2;
+        _animal.Descricao = "Cacatua";
+        _animal.Preco = 1320.85m;
+        _animal.IdPecuarista = 10;
+        _animal.Quantidade = 320;
 
-        var retorno = _service.Save(_animal, url);
+        var retorno = await _service.Save(_animal, url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 
     [Test]
     [TestCase("https://localhost:7079/api/Animais/AtualizarAnimal")]
-    public void TestAtualizar(string url)
+    public async Task TestAtualizar(string url)
     {
-        _animal.Id = 0;
-        _animal.Descricao = "";
-        _animal.Preco = 10m;
-        _animal.IdPecuarista = 8;
-        _animal.Quantidade = 2;
+        _animal.Id = 24;
+        _animal.Descricao = "Cacatua";
+        _animal.Preco = 1320.85m;
+        _animal.IdPecuarista = 10;
+        _animal.Quantidade = 320;
 
-        var retorno = _service.Save(_animal, url);
+        var retorno = await _service.Update(_animal, url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 
     [Test]
-    [TestCase("https://localhost:7079/api/Animais/ExcluirAnimal?id=21")]
-    [TestCase("https://localhost:7079/api/Animais/ExcluirAnimal?id=22")]
-    public void TestExcluir(string url)
+    [TestCase("https://localhost:7079/api/Animais/ExcluirAnimal?id=28")]
+    [TestCase("https://localhost:7079/api/Animais/ExcluirAnimal?id=27")]
+    public async Task TestExcluir(string url)
     {
-        var retorno = _service.Delete(url);
+        var retorno = await _service.Delete(url);
 
-        var ex = Assert.Throws<ArgumentException>(() => retorno.Start());
+        var expected = HttpStatusCode.OK;
 
-        Assert.IsNotNull(retorno, ex.Message);
+        Assert.That(retorno, Is.EqualTo(expected));
     }
 }
