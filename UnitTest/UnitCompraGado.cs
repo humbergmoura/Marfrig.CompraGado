@@ -77,8 +77,7 @@ public class UnitCompraGado
     }
 
     [Test]
-    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=29")]
-    [TestCase("https://localhost:7079/api/CompraGado/ExcluirCompraGado?id=30")]
+    [TestCase("https://localhost:7079/api/CompraGado/ExcluirAnimal?id=29")]
     public async Task TestExcluir(string url)
     {
         var retorno = await _service.Delete(url);

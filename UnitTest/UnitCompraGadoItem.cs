@@ -49,21 +49,6 @@ public class UnitCompraGadoItem
     }
 
     [Test]
-    [TestCase("https://localhost:7079/api/CompraGadoItem/SalvarCompraGadoItem")]
-    public async Task TestNovo(string url)
-    {
-        _compraGadoItem.IdCompraGado = 4;
-        _compraGadoItem.IdAnimal = 10;
-        _compraGadoItem.Quantidade = 100;
-
-        var retorno = await _service.Save(_compraGadoItem, url);
-
-        var expected = HttpStatusCode.OK;
-
-        Assert.That(retorno, Is.EqualTo(expected));
-    }
-
-    [Test]
     [TestCase("https://localhost:7079/api/CompraGadoItem/AtualizarCompraGadoItem")]
     public async Task TestAtualizar(string url)
     {
@@ -80,8 +65,8 @@ public class UnitCompraGadoItem
     }
 
     [Test]
-    [TestCase("https://localhost:7079/api/CompraGadoItem/ExcluirCompraGadoItem?id=24")]
-    [TestCase("https://localhost:7079/api/CompraGadoItem/ExcluirCompraGadoItem?id=25")]
+    [TestCase("https://localhost:7079/api/CompraGadoItem/ExcluirCompraGadoItem?id=20")]
+    [TestCase("https://localhost:7079/api/CompraGadoItem/ExcluirCompraGadoItem?id=23")]
     public async Task TestExcluir(string url)
     {
         var retorno = await _service.Delete(url);
